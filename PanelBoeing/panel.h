@@ -4,8 +4,8 @@
 #include <QObject>
 #include "../../Qtraspberrylib/display7seg.h"
 #include "../../Qtraspberrylib/mcp23017.h"
-#include "rotaryencoder.h"
-#include "pbutton.h"
+#include "../../Qtraspberrylib/rotaryencoder.h"
+#include "../../Qtraspberrylib/pbutton.h"
 
 
 class Panel : public QObject

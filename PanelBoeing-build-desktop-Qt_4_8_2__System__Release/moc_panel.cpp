@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'panel.h'
 **
-** Created: Sun Apr 27 20:21:21 2014
+** Created: Tue Apr 29 21:23:18 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!

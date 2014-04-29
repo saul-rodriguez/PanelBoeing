@@ -19,9 +19,9 @@ SOURCES += main.cpp\
     ../../Qtraspberrylib/ht16k33.cpp \
     ../../Qtraspberrylib/mcp23017_isr.cpp \
     ../../Qtraspberrylib/mcp23017.cpp \
-    rotaryencoder.cpp \
-    pbutton.cpp \
-    b777.cpp
+    b777.cpp \
+    ../../Qtraspberrylib/rotaryencoder.cpp \
+    ../../Qtraspberrylib/pbutton.cpp
 
 LIBS += -lwiringPi
 
@@ -32,8 +32,8 @@ HEADERS  += mainwindow.h \
     ../../Qtraspberrylib/mcp23017.h \
     ../../Qtraspberrylib/mcp23017_isr.h \
     hardware_conf.h \
-    rotaryencoder.h \
-    pbutton.h \
-    b777.h
+    b777.h \
+    ../../Qtraspberrylib/rotaryencoder.h \
+    ../../Qtraspberrylib/pbutton.h
 
 FORMS    += mainwindow.ui
