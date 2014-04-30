@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'rotaryencoder.h'
 **
-** Created: Sun Apr 27 12:02:03 2014
+** Created: Wed Apr 30 15:12:22 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../PanelBoeing/rotaryencoder.h"
+#include "../../Qtraspberrylib/rotaryencoder.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'rotaryencoder.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63

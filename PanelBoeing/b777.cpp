@@ -3,6 +3,10 @@
 B777::B777(QObject *parent) :
     Panel(parent)
 {
+    speed = 0;
+    heading = 0;
+    vs = 0;
+    altitude = 0;
 }
 
 void B777::button1(quint8 direction)
@@ -47,20 +51,41 @@ void B777::button8(quint8 direction)
 
 void B777::encoder1(quint8 direction)
 {
-    qDebug("B777 Button8 called");
+    qDebug("B777 encoder1 called");
+
+    if (direction == 1) { //UP
+        speed++;
+
+    } else { //DOWN
+        if (speed > 0)
+            speed--;
+    }
+
+    //Update display1
+    disp1.writeint(speed);
+
+    //Send telnet command to FGFS
+    QVariant aux(speed);
+    QString command = "set /autopilot/settings/target-speed-kt ";
+    command += aux.toString();
+
+    comm->sendData(command);
+
+
+
 }
 
 void B777::encoder2(quint8 direction)
 {
-     qDebug("B777 encoder called");
+     qDebug("B777 encoder2 called");
 }
 
 void B777::encoder3(quint8 direction)
 {
-     qDebug("B777 encoder called");
+     qDebug("B777 encoder3 called");
 }
 
 void B777::encoder4(quint8 direction)
 {
-     qDebug("B777 encoder called");
+     qDebug("B777 encoder4 called");
 }

@@ -28,6 +28,12 @@ public:
 signals:
     
 public slots:
+
+private:
+    uint speed;
+    uint heading;
+    int vs;
+    int altitude;
     
 };
 

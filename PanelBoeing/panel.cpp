@@ -2,6 +2,8 @@
 #include "hardware_conf.h"
 
 #include <wiringPi.h>
+#include <qmessagebox.h>
+
 #include "../../Qtraspberrylib/mcp23017_isr.h"
 
 Panel::Panel(QObject *parent) :
@@ -15,22 +17,22 @@ Panel::Panel(QObject *parent) :
     disp1.open(DISP1);
     disp1.setBlinkRate(0);
     disp1.setBrightness(brightness);
-    disp1.writeint(0);
+    disp1.writeint(1);
 
     disp2.open(DISP2);
     disp2.setBlinkRate(0);
     disp2.setBrightness(brightness);
-    disp2.writeint(0);
+    disp2.writeint(2);
 
     disp3.open(DISP3);
     disp3.setBlinkRate(0);
     disp3.setBrightness(brightness);
-    disp3.writeint(0);
+    disp3.writeint(3);
 
     disp4.open(DISP4);
     disp4.setBlinkRate(0);
     disp4.setBrightness(brightness);
-    disp4.writeint(0);
+    disp4.writeint(4);
 
     //Setup extender 1 and 2
     int ret;
@@ -65,7 +67,36 @@ Panel::Panel(QObject *parent) :
     connect(&but6,SIGNAL(button_changed(quint8)),this,SLOT(but6_changed(quint8)));
     connect(&but7,SIGNAL(button_changed(quint8)),this,SLOT(but7_changed(quint8)));
     connect(&but8,SIGNAL(button_changed(quint8)),this,SLOT(but8_changed(quint8)));
+
+    //Setup telnet object
+    comm = new QtTelnet;
+
+    //comm->message(
+    connect(comm, SIGNAL(message(QString)),this, SLOT(telnetMessage(QString)));
+    connect(comm, SIGNAL(connectionError(QAbstractSocket::SocketError)),
+            this, SLOT(telnetConnectionError(QAbstractSocket::SocketError)));
 }
+
+void Panel::setDispBrightness(quint8 br){
+    disp1.setBrightness(br);
+    disp2.setBrightness(br);
+    disp3.setBrightness(br);
+    disp4.setBrightness(br);
+}
+
+void Panel::telnetMessage(const QString &msg)
+{
+    qDebug("Message received");
+    emit telMes(msg);
+}
+
+void Panel::telnetConnectionError(QAbstractSocket::SocketError)
+{
+    QMessageBox msg;
+    msg.setText("Connection Error, Start FGFS with --telnet=5401");
+    msg.exec();
+}
+
 
 //Ext1 PORTA interrupt slot
 void Panel::ext1_intA(quint8 value)
@@ -178,6 +209,7 @@ void Panel::enc1_changed(quint8 direction)
 {
     qDebug("Direction enc1 = %d",direction);
     encoder1(direction);
+
 }
 
 void Panel::enc2_changed(quint8 direction)

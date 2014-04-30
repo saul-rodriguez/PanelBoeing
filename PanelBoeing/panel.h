@@ -6,6 +6,7 @@
 #include "../../Qtraspberrylib/mcp23017.h"
 #include "../../Qtraspberrylib/rotaryencoder.h"
 #include "../../Qtraspberrylib/pbutton.h"
+#include"../../Qtraspberrylib/qttelnet.h"
 
 
 class Panel : public QObject
@@ -28,9 +29,15 @@ public:
     virtual void button7(quint8 direction);
     virtual void button8(quint8 direction);
 
+    void setDispBrightness(quint8 br);
+
 signals:
+    void telMes(QString msg);
     
 public slots:
+    void telnetMessage(const QString &msg);
+    void telnetConnectionError(QAbstractSocket::SocketError);
+
     void ext1_intA(quint8 value);
     void ext1_intB(quint8 value);
 
@@ -73,6 +80,9 @@ protected:
     Pbutton but6;
     Pbutton but7;
     Pbutton but8;
+
+public:
+    QtTelnet* comm;
 };
 
 #endif // PANEL_H

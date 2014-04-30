@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui\
+            network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,7 +22,8 @@ SOURCES += main.cpp\
     ../../Qtraspberrylib/mcp23017.cpp \
     b777.cpp \
     ../../Qtraspberrylib/rotaryencoder.cpp \
-    ../../Qtraspberrylib/pbutton.cpp
+    ../../Qtraspberrylib/pbutton.cpp \
+    ../../Qtraspberrylib/qttelnet.cpp
 
 LIBS += -lwiringPi
 
@@ -34,6 +36,7 @@ HEADERS  += mainwindow.h \
     hardware_conf.h \
     b777.h \
     ../../Qtraspberrylib/rotaryencoder.h \
-    ../../Qtraspberrylib/pbutton.h
+    ../../Qtraspberrylib/pbutton.h \
+    ../../Qtraspberrylib/qttelnet.h
 
 FORMS    += mainwindow.ui
