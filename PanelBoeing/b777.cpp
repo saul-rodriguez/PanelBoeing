@@ -145,7 +145,7 @@ void B777::encoder1(quint8 direction)
     }
 
     //Update display1
-    disp1.writeint(speed);
+    disp1.writeint_zeropad(speed,3);
 
     //Send telnet command to FGFS
     QVariant aux(speed);
@@ -177,8 +177,8 @@ void B777::encoder2(quint8 direction)
         }
     }
 
-    //Update display1
-    disp2.writeint(heading);
+    //Update display2
+    disp2.writeint_zeropad(heading,3);
 
 
     //Send telnet command to FGFS
@@ -192,10 +192,56 @@ void B777::encoder2(quint8 direction)
 
 void B777::encoder3(quint8 direction)
 {
+    //VERTICAL SPEED
+
      qDebug("B777 encoder3 called");
+
+     if (direction) {
+         if (vs < 6000) {
+            vs += 100;
+         }
+     } else {
+         if (vs > -8000) {
+            vs -= 100;
+         }
+     }
+
+     //Update display3
+     disp3.writeint_zeropad(vs,4);
+
+
+     //Send telnet command to FGFS
+     QVariant aux(vs);
+     QString command = "set /autopilot/settings/vertical-speed-fpm ";
+     command += aux.toString();
+
+     comm->sendData(command);
 }
 
 void B777::encoder4(quint8 direction)
 {
+    //ALTITUDE
+
      qDebug("B777 encoder4 called");
+
+     if (direction) { //UP
+         altitude += 100;
+     } else {   //DOWN
+         if (altitude > 0) {
+            altitude -= 100;
+         }
+     }
+
+     disp4.writeint_zeropad(altitude,5);
+
+     //Send telnet command to FGFS
+     QVariant aux(altitude);
+     QString command = "set /autopilot/settings/counter-set-altitude-ft ";
+     command += aux.toString();
+
+     comm->sendData(command);
+
+
 }
+
+

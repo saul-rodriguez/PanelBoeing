@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'display7seg.h'
 **
-** Created: Wed Apr 30 15:12:01 2014
+** Created: Thu May 1 17:47:37 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
