@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     b777.cpp \
     ../../Qtraspberrylib/rotaryencoder.cpp \
     ../../Qtraspberrylib/pbutton.cpp \
-    ../../Qtraspberrylib/qttelnet.cpp
+    ../../Qtraspberrylib/qttelnet.cpp \
+    b787.cpp
 
 LIBS += -lwiringPi
 
@@ -37,6 +38,7 @@ HEADERS  += mainwindow.h \
     b777.h \
     ../../Qtraspberrylib/rotaryencoder.h \
     ../../Qtraspberrylib/pbutton.h \
-    ../../Qtraspberrylib/qttelnet.h
+    ../../Qtraspberrylib/qttelnet.h \
+    b787.h
 
 FORMS    += mainwindow.ui

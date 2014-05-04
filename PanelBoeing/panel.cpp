@@ -9,6 +9,10 @@
 Panel::Panel(QObject *parent) :
     QObject(parent)
 {
+}
+
+void Panel::setup_hardware()
+{
     wiringPiSetupSys();
 
     //Setup displays

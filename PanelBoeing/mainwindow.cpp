@@ -10,9 +10,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_IP->setText("192.168.0.10");
     ui->lineEdit_port->setText("5401");
 
-    fgpanel = &panel_777;
+    ui->pushButton_Connect->setEnabled(false);
 
-    connect(fgpanel,SIGNAL(telMes(QString)),this,SLOT(telnetMes(QString)));
+    //fgpanel = &panel_777;
+    //fgpanel = &panel_787;
+
+    //connect(fgpanel,SIGNAL(telMes(QString)),this,SLOT(telnetMes(QString)));
+    ui->comboBox->addItem("Boeing777");
+    ui->comboBox->addItem("Boeing787");
+
+
+    fgpanel = NULL;
 }
 
 MainWindow::~MainWindow()
@@ -54,4 +62,31 @@ void MainWindow::on_pushButtonCommand_clicked()
 void MainWindow::on_dialBrightness_valueChanged(int value)
 {
     fgpanel->setDispBrightness(value);
+}
+
+
+void MainWindow::on_pushButtonSelectProfile_clicked()
+{
+    //fgpanel = &panel_777;
+    QString profile = ui->comboBox->currentText();
+
+    if (profile == "Boeing777") {
+        qDebug("Boeing777 selected");
+        panel_777 = new B777(this);
+        fgpanel = panel_777;
+    }
+
+    if (profile == "Boeing787") {
+        qDebug("Boeing787 selected");
+        panel_787 = new B787(this);
+        fgpanel = panel_787;
+    }
+
+
+    fgpanel->setup_hardware();
+
+    connect(fgpanel,SIGNAL(telMes(QString)),this,SLOT(telnetMes(QString)));
+
+    ui->pushButtonSelectProfile->setEnabled(false);
+    ui->pushButton_Connect->setEnabled(true);
 }

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "panel.h"
 #include "b777.h"
+#include "b787.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,11 +26,14 @@ private slots:
 
     void on_dialBrightness_valueChanged(int value);
 
+    void on_pushButtonSelectProfile_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     Panel *fgpanel;
-    B777 panel_777;
+    B777 *panel_777;
+    B787 *panel_787;
 };
 
 #endif // MAINWINDOW_H

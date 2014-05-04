@@ -1,6 +1,6 @@
-#include "b777.h"
+#include "b787.h"
 
-B777::B777(QObject *parent) :
+B787::B787(QObject *parent) :
     Panel(parent)
 {
     speed = 200;
@@ -9,132 +9,133 @@ B777::B777(QObject *parent) :
     altitude = 10000;
 }
 
-void B777::button1(quint8 direction)
+
+void B787::button1(quint8 direction)
 {
     //AUTOPILOT ON/OFF
 
-    qDebug("B777 Button1 called");
+    qDebug("B787 Button1 called");
 
     QString command;
 
     if (direction) { //turn on
-        command = "set /instrumentation/afds/inputs/AP 1";
+        command = "set /autopilot/panel/master 1";
     } else { //turn off
-        command = "set /instrumentation/afds/inputs/AP 0";
+        command = "set /autopilot/panel/master 0";
     }
     comm->sendData(command);
 }
 
-void B777::button2(quint8 direction)
+void B787::button2(quint8 direction)
 {
     //AUTOTHROTTLE ON/OFF
 
-    qDebug("B777 Button2 called");
+    qDebug("B787 Button2 called");
 
     QString command;
 
     if (direction) { //turn on
-        command = "set /instrumentation/afds/inputs/autothrottle-index 5";
+        command = "set /autopilot/panel/auto-throttle 1";
     } else { //turn off
-        command = "set /instrumentation/afds/inputs/autothrottle-index  0";
+        command = "set /autopilot/panel/auto-throttle 0";
     }
     comm->sendData(command);
 }
 
-void B777::button3(quint8 direction)
+void B787::button3(quint8 direction)
 {
     //HEADING HOLD
 
-    qDebug("B777 Button3 called");
+    qDebug("B787 Button3 called");
 
     QString command;
 
     if (direction) { //turn on
-        command = "set /instrumentation/afds/inputs/lateral-index 1";
+        command = "set /autopilot/panel/hdg hdg";
     } else { //turn off
-        command = "set /instrumentation/afds/inputs/lateral-index 0";
+        command = "set /autopilot/panel/hdg";
     }
     comm->sendData(command);
 
 }
 
-void B777::button4(quint8 direction)
+void B787::button4(quint8 direction)
 {
     //VS/FPA
 
-    qDebug("B777 Button4 called");
+    qDebug("B787 Button4 called");
 
     QString command;
 
     if (direction) { //turn on
-        command = "set /instrumentation/afds/inputs/vertical-index 2";
+        command = "set /autopilot/panel/alt vs";
     } else { //turn off
-        command = "set /instrumentation/afds/inputs/vertical-index 0";
+        command = "set /autopilot/panel/alt";
     }
     comm->sendData(command);
 
 }
 
-void B777::button5(quint8 direction)
+void B787::button5(quint8 direction)
 {
     //ALTITUDE HOLD
 
-    qDebug("B777 Button5 called");
+    qDebug("B787 Button5 called");
 
     QString command;
 
     if (direction) { //turn on
-        command = "set /instrumentation/afds/inputs/vertical-index 1";
+        command = "set /autopilot/panel/alt alt";
     } else { //turn off
-        command = "set /instrumentation/afds/inputs/vertical-index 0";
+        command = "set /autopilot/panel/alt";
     }
     comm->sendData(command);
 
 }
 
-void B777::button6(quint8 direction)
+void B787::button6(quint8 direction)
 {
     //APP
 
-    qDebug("B777 Button6 called");
+    qDebug("B787 Button6 called");
 
     QString command;
 
     if (direction) { //turn on
-        command = "set /instrumentation/afds/inputs/gs-armed 1";
+        command = "set /autopilot/panel/alt app";
     } else { //turn off
-        command = "set /instrumentation/afds/inputs/gs-armed 0";
+        command = "set /autopilot/panel/alt";
     }
     comm->sendData(command);
 }
 
-void B777::button7(quint8 direction)
+void B787::button7(quint8 direction)
 {
     //LOC
 
-    qDebug("B777 Button7 called");
+    qDebug("B787 Button7 called");
 
-    qDebug("B777 Button6 called");
+    qDebug("B787 Button6 called");
 
     QString command;
 
     if (direction) { //turn on
-        command = "set /instrumentation/afds/inputs/loc-armed 1";
+        command = "set /autopilot/panel/hdg loc";
     } else { //turn off
-        command = "set /instrumentation/afds/inputs/loc-armed 0";
+        command = "set /autopilot/panel/hdg";
     }
     comm->sendData(command);
 }
 
-void B777::button8(quint8 direction)
+void B787::button8(quint8 direction)
 {
-    qDebug("B777 Button8 called");
+    qDebug("B787 Button8 called");
 }
 
-void B777::encoder1(quint8 direction)
+void B787::encoder1(quint8 direction)
 {
     // SPEED
-    qDebug("B777 encoder1 called");
+    qDebug("B787 encoder1 called");
 
     if (direction == 1) { //UP
         speed++;
@@ -156,11 +157,11 @@ void B777::encoder1(quint8 direction)
 
 }
 
-void B777::encoder2(quint8 direction)
+void B787::encoder2(quint8 direction)
 {
     // HEADING
 
-    qDebug("B777 encoder2 called");
+    qDebug("B787 encoder2 called");
 
     if (direction == 1) { //UP
         if (heading >= 360) {
@@ -190,11 +191,11 @@ void B777::encoder2(quint8 direction)
 
 }
 
-void B777::encoder3(quint8 direction)
+void B787::encoder3(quint8 direction)
 {
     //VERTICAL SPEED
 
-     qDebug("B777 encoder3 called");
+     qDebug("B787 encoder3 called");
 
      if (direction) {
          if (vs < 6000) {
@@ -218,11 +219,11 @@ void B777::encoder3(quint8 direction)
      comm->sendData(command);
 }
 
-void B777::encoder4(quint8 direction)
+void B787::encoder4(quint8 direction)
 {
     //ALTITUDE
 
-     qDebug("B777 encoder4 called");
+     qDebug("B787 encoder4 called");
 
      if (direction) { //UP
          altitude += 100;
@@ -236,7 +237,7 @@ void B777::encoder4(quint8 direction)
 
      //Send telnet command to FGFS
      QVariant aux(altitude);
-     QString command = "set /autopilot/settings/counter-set-altitude-ft ";
+     QString command = "set /autopilot/settings/target-altitude-ft ";
      command += aux.toString();
 
      comm->sendData(command);

@@ -15,6 +15,10 @@ class Panel : public QObject
 public:
     explicit Panel(QObject *parent = 0);
 
+    void setDispBrightness(quint8 br);
+    void setup_hardware();
+
+
     virtual void encoder1(quint8 direction);
     virtual void encoder2(quint8 direction);
     virtual void encoder3(quint8 direction);
@@ -29,7 +33,6 @@ public:
     virtual void button7(quint8 direction);
     virtual void button8(quint8 direction);
 
-    void setDispBrightness(quint8 br);
 
 signals:
     void telMes(QString msg);
