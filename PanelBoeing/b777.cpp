@@ -114,7 +114,6 @@ void B777::button7(quint8 direction)
 
     qDebug("B777 Button7 called");
 
-    qDebug("B777 Button6 called");
 
     QString command;
 
@@ -128,7 +127,19 @@ void B777::button7(quint8 direction)
 
 void B777::button8(quint8 direction)
 {
+    //FLCH
+
     qDebug("B777 Button8 called");
+
+    QString command;
+
+    if (direction) { //turn on
+        command = "set /instrumentation/afds/inputs/vertical-index 8";
+    } else { //turn off
+        command = "set /instrumentation/afds/inputs/vertical-index 0";
+    }
+    comm->sendData(command);
+
 }
 
 void B777::encoder1(quint8 direction)

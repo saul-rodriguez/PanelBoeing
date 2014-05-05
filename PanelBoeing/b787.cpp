@@ -129,7 +129,18 @@ void B787::button7(quint8 direction)
 
 void B787::button8(quint8 direction)
 {
+    // FLCH
+
     qDebug("B787 Button8 called");
+
+    QString command;
+
+    if (direction) { //turn on
+        command = "set /autopilot/panel/alt alt";
+    } else { //turn off
+        command = "set /autopilot/panel/alt";
+    }
+    comm->sendData(command);
 }
 
 void B787::encoder1(quint8 direction)
