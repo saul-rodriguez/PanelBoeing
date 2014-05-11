@@ -44,6 +44,9 @@ public slots:
     void ext1_intA(quint8 value);
     void ext1_intB(quint8 value);
 
+    void ext2_intA(quint8 value);
+    void ext2_intB(quint8 value);
+
     void enc1_changed(quint8 direction);
     void enc2_changed(quint8 direction);
     void enc3_changed(quint8 direction);

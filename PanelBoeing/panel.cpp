@@ -56,6 +56,9 @@ void Panel::setup_hardware()
     ret = ext2.setPullup(PORTA,A_PULLUP2);
     ret = ext2.setPullup(PORTB,B_PULLUP2);
 
+    setupMcp23017_isr_ext2(&ext2);
+    connect(&ext2,SIGNAL(interrupt_B(quint8)),this,SLOT(ext2_intB(quint8)));
+
     //Setup encoders
     connect(&enc1,SIGNAL(encoder_changed(quint8)),this,SLOT(enc1_changed(quint8)));
     connect(&enc2,SIGNAL(encoder_changed(quint8)),this,SLOT(enc2_changed(quint8)));
@@ -206,6 +209,18 @@ void Panel::ext1_intB(quint8 value)
         default: break;
     }
 
+}
+
+//Ext2 PORTA interrupt slot
+void Panel::ext2_intA(quint8 value)
+{
+
+}
+
+//Ext2 PORTB interrupt slot
+void Panel::ext2_intB(quint8 value)
+{
+    qDebug("EXT2 PORTB ISR called");
 }
 
 //Encoders slots

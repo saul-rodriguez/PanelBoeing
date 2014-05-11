@@ -32,7 +32,7 @@
 #define INTB_PINS1 0xFF
 
 #define INTA_PINS2 0x00
-#define INTB_PINS2 0x00
+#define INTB_PINS2 0xFF
 
 //Some Macro definitions
 //#define LED_B0_OFF myext.writePin(PORTB,0,false)
