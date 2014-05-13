@@ -64,6 +64,9 @@ void Panel::setup_hardware()
     connect(&enc2,SIGNAL(encoder_changed(quint8)),this,SLOT(enc2_changed(quint8)));
     connect(&enc3,SIGNAL(encoder_changed(quint8)),this,SLOT(enc3_changed(quint8)));
     connect(&enc4,SIGNAL(encoder_changed(quint8)),this,SLOT(enc4_changed(quint8)));
+    connect(&enc5,SIGNAL(encoder_changed(quint8)),this,SLOT(enc5_changed(quint8)));
+    connect(&enc6,SIGNAL(encoder_changed(quint8)),this,SLOT(enc6_changed(quint8)));
+
 
     //Setup buttons & switches
     connect(&but1,SIGNAL(button_changed(quint8)),this,SLOT(but1_changed(quint8)));
@@ -214,13 +217,33 @@ void Panel::ext1_intB(quint8 value)
 //Ext2 PORTA interrupt slot
 void Panel::ext2_intA(quint8 value)
 {
-
+    qDebug("EXT2 PORTA ISR called");
 }
 
 //Ext2 PORTB interrupt slot
 void Panel::ext2_intB(quint8 value)
 {
     qDebug("EXT2 PORTB ISR called");
+
+    //Compare new state of portB with latest state:
+    quint8 aux,enc,newstate;
+    aux = ext2.portb ^ value; //Find pin that produced interruption
+    //qDebug("aux = %x",aux);
+    ext2.portb= value;
+
+    enc = aux & ENCODER5;
+    if (enc) {
+        newstate = (value & ENCODER5) >> 0;
+        qDebug("newstate = %x",newstate);
+        enc5.change_state(newstate);
+    }
+
+    enc = aux & ENCODER6;
+    if (enc) {
+        newstate = (value & ENCODER6) >> 2;
+        qDebug("newstate = %x",newstate);
+        enc6.change_state(newstate);
+    }
 }
 
 //Encoders slots
@@ -247,6 +270,18 @@ void Panel::enc4_changed(quint8 direction)
 {
     qDebug("Direction enc4 = %d",direction);
     encoder4(direction);
+}
+
+void Panel::enc5_changed(quint8 direction)
+{
+    qDebug("Direction enc5 = %d",direction);
+    encoder5(direction);
+}
+
+void Panel::enc6_changed(quint8 direction)
+{
+    qDebug("Direction enc6 = %d",direction);
+    encoder6(direction);
 }
 
 //Button slots:
@@ -355,6 +390,14 @@ void Panel::encoder3(quint8 direction)
 }
 
 void Panel::encoder4(quint8 direction)
+{
+}
+
+void Panel::encoder5(quint8 direction)
+{
+}
+
+void Panel::encoder6(quint8 direction)
 {
 }
 

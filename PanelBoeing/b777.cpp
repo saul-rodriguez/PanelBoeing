@@ -255,4 +255,14 @@ void B777::encoder4(quint8 direction)
 
 }
 
+void B777::encoder5(quint8 direction)
+{
+
+}
+
+void B777::encoder6(quint8 direction)
+{
+
+}
+
 

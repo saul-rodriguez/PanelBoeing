@@ -23,6 +23,8 @@ public:
     virtual void encoder2(quint8 direction);
     virtual void encoder3(quint8 direction);
     virtual void encoder4(quint8 direction);
+    virtual void encoder5(quint8 direction);
+    virtual void encoder6(quint8 direction);
 
     virtual void button1(quint8 direction);
     virtual void button2(quint8 direction);
@@ -51,6 +53,8 @@ public slots:
     void enc2_changed(quint8 direction);
     void enc3_changed(quint8 direction);
     void enc4_changed(quint8 direction);
+    void enc5_changed(quint8 direction);
+    void enc6_changed(quint8 direction);
 
     void but1_changed(quint8 direction);
     void but2_changed(quint8 direction);
@@ -77,6 +81,8 @@ protected:
     RotaryEncoder enc2;
     RotaryEncoder enc3;
     RotaryEncoder enc4;
+    RotaryEncoder enc5;
+    RotaryEncoder enc6;
 
     Pbutton but1;
     Pbutton but2;

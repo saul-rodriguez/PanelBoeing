@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'panel.h'
 **
-** Created: Sun May 11 21:10:47 2014
+** Created: Tue May 13 18:39:59 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Panel[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      19,   14, // methods
+      21,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -52,6 +52,8 @@ static const uint qt_meta_data_Panel[] = {
      379,  201,   26,   26, 0x0a,
      400,  201,   26,   26, 0x0a,
      421,  201,   26,   26, 0x0a,
+     442,  201,   26,   26, 0x0a,
+     463,  201,   26,   26, 0x0a,
 
        0        // eod
 };
@@ -64,7 +66,8 @@ static const char qt_meta_stringdata_Panel[] = {
     "ext2_intA(quint8)\0ext2_intB(quint8)\0"
     "enc1_changed(quint8)\0direction\0"
     "enc2_changed(quint8)\0enc3_changed(quint8)\0"
-    "enc4_changed(quint8)\0but1_changed(quint8)\0"
+    "enc4_changed(quint8)\0enc5_changed(quint8)\0"
+    "enc6_changed(quint8)\0but1_changed(quint8)\0"
     "but2_changed(quint8)\0but3_changed(quint8)\0"
     "but4_changed(quint8)\0but5_changed(quint8)\0"
     "but6_changed(quint8)\0but7_changed(quint8)\0"
@@ -88,14 +91,16 @@ void Panel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 8: _t->enc2_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
         case 9: _t->enc3_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
         case 10: _t->enc4_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 11: _t->but1_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 12: _t->but2_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 13: _t->but3_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 14: _t->but4_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 15: _t->but5_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 16: _t->but6_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 17: _t->but7_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 18: _t->but8_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 11: _t->enc5_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 12: _t->enc6_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 13: _t->but1_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 14: _t->but2_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 15: _t->but3_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 16: _t->but4_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 17: _t->but5_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 18: _t->but6_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 19: _t->but7_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 20: _t->but8_changed((*reinterpret_cast< quint8(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -133,9 +138,9 @@ int Panel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 19)
+        if (_id < 21)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 21;
     }
     return _id;
 }

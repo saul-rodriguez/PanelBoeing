@@ -66,6 +66,11 @@
 #define ENCODER3 0b00110000
 #define ENCODER4 0b11000000
 
+// Encoder mask address in port B ext2
+#define ENCODER5 0b00000011
+#define ENCODER6 0b00001100
+
+
 /**********************
  * Push button/Switch *
  **********************/
