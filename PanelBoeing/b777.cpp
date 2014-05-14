@@ -1,5 +1,17 @@
 #include "b777.h"
 
+const quint16 B777::range[] = {
+    10,
+    20,
+    40,
+    80,
+    160,
+    320,
+    640,
+};
+
+
+
 B777::B777(QObject *parent) :
     Panel(parent)
 {
@@ -7,6 +19,14 @@ B777::B777(QObject *parent) :
     heading = 360;
     vs = 0;
     altitude = 10000;
+
+    range_index = 0;
+
+    mode_index = 0;
+    mode[0] = "APP";
+    mode[1] = "VOR";
+    mode[2] = "MAP";
+    mode[3] = "PLN";
 }
 
 void B777::button1(quint8 direction)
@@ -257,11 +277,63 @@ void B777::encoder4(quint8 direction)
 
 void B777::encoder5(quint8 direction)
 {
+    //Mode
+    qDebug("B777 encoder5 called");
+
+    if (direction) { //UP
+        if (mode_index < 3) {
+            mode_index++;
+        } else {
+            mode_index = 0;
+        }
+    } else { //DOWN
+        if (mode_index > 0) {
+            mode_index--;
+        } else {
+            mode_index = 3;
+        }
+    }
+
+    QVariant aux(mode[mode_index]);
+    QString command = "set /instrumentation/efis/mfd/display-mode ";
+    command += aux.toString();
+
+    comm->sendData(command);
+
+    QVariant aux2(mode_index);
+    command = "set /instrumentation/efis/mfd/mode-num ";
+    command += aux2.toString();
+
+    comm->sendData(command);
 
 }
 
 void B777::encoder6(quint8 direction)
 {
+    //Range
+    qDebug("B777 encoder6 called");
+
+    if (direction) { //UP
+        if (range_index < 6) {
+            range_index++;
+        } else {
+            range_index = 0;
+        }
+
+    } else { //DOWN
+        if (range_index > 0) {
+            range_index--;
+        } else {
+            range_index = 6;
+        }
+    }
+
+    //Send telnet command to FGFS
+    QVariant aux(range[range_index]);
+    QString command = "set /instrumentation/efis/inputs/range-nm ";
+    command += aux.toString();
+
+    comm->sendData(command);
 
 }
 

@@ -36,7 +36,12 @@ private:
     uint heading;
     int vs;
     int altitude;
+
+    static const quint16 range[];
+    uint range_index;
     
+    QString mode[4];
+    uint mode_index;
 };
 
 #endif // B777_H
