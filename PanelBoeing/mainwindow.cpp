@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->lineEdit_IP->setText("192.168.0.10");
+    ui->lineEdit_IP->setText("192.168.0.13");
     ui->lineEdit_port->setText("5401");
 
     ui->pushButton_Connect->setEnabled(false);

@@ -11,8 +11,41 @@ Panel::Panel(QObject *parent) :
 {
 }
 
+void Panel::export_pins()
+{
+    //pin (0)17 (ISR)
+    system("gpio mode 0 in");
+    system("gpio mode 0 up");
+    system("gpio edge 0 falling");
+    system("gpio export 17 in");
+
+    //pin (1)18 (ISR)
+    system("gpio mode 1 in");
+    system("gpio mode 1 up");
+    system("gpio edge 1 falling");
+    system("gpio export 18 in");
+
+    //pin (4)23 (ISR)
+    system("gpio mode 4 in");
+    system("gpio mode 4 up");
+    system("gpio edge 4 falling");
+    system("gpio export 23 in");
+
+    //pin (5)24 (ISR)
+    system("gpio mode 5 in");
+    system("gpio mode 5 up");
+    system("gpio edge 5 falling");
+    system("gpio export 24 in");
+
+
+
+}
+
 void Panel::setup_hardware()
 {
+    export_pins();
+
+
     wiringPiSetupSys();
 
     //Setup displays

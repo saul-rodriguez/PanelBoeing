@@ -23,6 +23,8 @@ public:
     void encoder2(quint8 direction);
     void encoder3(quint8 direction);
     void encoder4(quint8 direction);
+    void encoder5(quint8 direction);
+    void encoder6(quint8 direction);
     
 signals:
     
@@ -33,6 +35,11 @@ private:
     uint heading;
     int vs;
     int altitude;
+
+    static const quint16 range[];
+    uint range_index;
+
+    uint mode_index;
     
 };
 

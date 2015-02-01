@@ -1,5 +1,15 @@
 #include "b787.h"
 
+const quint16 B787::range[] = {
+    10,
+    20,
+    40,
+    80,
+    160,
+    320,
+    640,
+};
+
 B787::B787(QObject *parent) :
     Panel(parent)
 {
@@ -7,6 +17,9 @@ B787::B787(QObject *parent) :
     heading = 360;
     vs = 0;
     altitude = 10000;
+
+    range_index = 0;
+    mode_index = 0;
 }
 
 
@@ -256,4 +269,67 @@ void B787::encoder4(quint8 direction)
 
 }
 
+void B787::encoder5(quint8 direction)
+{
+    //Mode
+    qDebug("B787 encoder5 called");
+
+    if (direction) { //UP
+        if (mode_index < 3) {
+            mode_index++;
+        } else {
+            mode_index = 0;
+        }
+    } else { //DOWN
+        if (mode_index > 0) {
+            mode_index--;
+        } else {
+            mode_index = 3;
+        }
+    }
+
+    QVariant aux(mode_index);
+    QString command = "set /controls/mfd/extra ";
+    command += aux.toString();
+
+    comm->sendData(command);
+
+    /*
+    QVariant aux2(mode_index);
+    command = "set /instrumentation/efis/mfd/mode-num ";
+    command += aux2.toString();
+
+    comm->sendData(command);
+    */
+}
+
+
+void B787::encoder6(quint8 direction)
+{
+    //Range
+    qDebug("B787 encoder6 called");
+
+    if (direction) { //UP
+        if (range_index < 6) {
+            range_index++;
+        } else {
+            range_index = 0;
+        }
+
+    } else { //DOWN
+        if (range_index > 0) {
+            range_index--;
+        } else {
+            range_index = 6;
+        }
+    }
+
+    //Send telnet command to FGFS
+    QVariant aux(range[range_index]);
+    QString command = "set /instrumentation/ndfull/range ";
+    command += aux.toString();
+
+    comm->sendData(command);
+
+}
 

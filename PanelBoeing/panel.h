@@ -17,6 +17,7 @@ public:
 
     void setDispBrightness(quint8 br);
     void setup_hardware();
+    void export_pins();
 
 
     virtual void encoder1(quint8 direction);
