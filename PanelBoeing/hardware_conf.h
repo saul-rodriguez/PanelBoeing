@@ -6,6 +6,8 @@
 #define MCP23017_1_INTB 18
 #define MCP23017_2_INTA 27
 #define MCP23017_2_INTB 22
+#define MCP23017_3_INTA 23
+#define MCP23017_3_INTB 24
 
 /*****************************************
  * Mcp23017 extender Hardware definitions
@@ -14,18 +16,29 @@
 //I2C Addresses
 #define EXT1 0x20
 #define EXT2 0x21
+#define EXT3 0x22
 
+//Ext1
 #define TRISA1 0xFF
 #define TRISB1 0xFF
 
 #define A_PULLUP1 0xFF
 #define B_PULLUP1 0xFF
 
+//Ext2
 #define TRISA2 0x00
 #define TRISB2 0xFF
 
 #define A_PULLUP2 0xFF
 #define B_PULLUP2 0xFF
+
+//Ext3
+#define TRISA3 0x00
+#define TRISB3 0xFF
+
+#define A_PULLUP3 0xFF
+#define B_PULLUP3 0xFF
+
 
 //Mcp23017 Pin interruption configuration
 #define INTA_PINS1 0xFF
@@ -33,6 +46,9 @@
 
 #define INTA_PINS2 0x00
 #define INTB_PINS2 0xFF
+
+#define INTA_PINS3 0x00
+#define INTB_PINS3 0xFF
 
 //Some Macro definitions
 //#define LED_B0_OFF myext.writePin(PORTB,0,false)
@@ -75,7 +91,7 @@
  * Push button/Switch *
  **********************/
 
-// button mast address in port B ext1
+// button mask address in port B ext1
 
 #define BUT1 0b00000001
 #define BUT2 0b00000010
@@ -85,6 +101,10 @@
 #define BUT6 0b00100000
 #define BUT7 0b01000000
 #define BUT8 0b10000000
+
+// button mask address in port B ext3
+#define BUT9 0b10000000
+#define BUT10 0b01000000
 
 /*****************
  * Buttons' LEDs *
@@ -106,6 +126,11 @@
 #define LED_BUT7_OFF ext2.writePin(PORTA,6,0)
 #define LED_BUT8_ON  ext2.writePin(PORTA,7,1)
 #define LED_BUT8_OFF ext2.writePin(PORTA,7,0)
+
+#define LED_BUT9_ON  ext3.writePin(PORTA,0,1)
+#define LED_BUT9_OFF ext3.writePin(PORTA,0,0)
+#define LED_BUT10_ON  ext3.writePin(PORTA,1,1)
+#define LED_BUT10_OFF ext3.writePin(PORTA,1,0)
 
 
 #endif // HARDWARE_CONF_H

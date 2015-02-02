@@ -36,6 +36,8 @@ public:
     virtual void button7(quint8 direction);
     virtual void button8(quint8 direction);
 
+    virtual void button9(quint8 direction);
+    virtual void button10(quint8 direction);
 
 signals:
     void telMes(QString msg);
@@ -49,6 +51,7 @@ public slots:
 
     void ext2_intA(quint8 value);
     void ext2_intB(quint8 value);
+    void ext3_intB(quint8 value);
 
     void enc1_changed(quint8 direction);
     void enc2_changed(quint8 direction);
@@ -66,6 +69,9 @@ public slots:
     void but7_changed(quint8 direction);
     void but8_changed(quint8 direction);
 
+    void but9_changed(quint8 direction);
+    void but10_changed(quint8 direction);
+
 protected:
     Display7seg disp1;
     Display7seg disp2;
@@ -75,6 +81,8 @@ protected:
 
     Mcp23017 ext1;
     Mcp23017 ext2;
+    Mcp23017 ext3;
+
     //quint8 porta1_value;
     //quint8 portb1_value;
 
@@ -93,6 +101,8 @@ protected:
     Pbutton but6;
     Pbutton but7;
     Pbutton but8;
+    Pbutton but9;
+    Pbutton but10;
 
 public:
     QtTelnet* comm;

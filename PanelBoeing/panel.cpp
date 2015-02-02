@@ -37,7 +37,11 @@ void Panel::export_pins()
     system("gpio edge 5 falling");
     system("gpio export 24 in");
 
-
+    //pin (5)24 (ISR)
+    system("gpio mode 5 in");
+    system("gpio mode 5 up");
+    system("gpio edge 5 falling");
+    system("gpio export 24 in");
 
 }
 
@@ -71,7 +75,7 @@ void Panel::setup_hardware()
     disp4.setBrightness(brightness);
     disp4.writeint(4);
 
-    //Setup extender 1 and 2
+    //Setup extender 1
     int ret;
     ret = ext1.open(EXT1);
     ret = ext1.setTris(PORTA,TRISA1);
@@ -83,6 +87,7 @@ void Panel::setup_hardware()
     connect(&ext1,SIGNAL(interrupt_A(quint8)),this,SLOT(ext1_intA(quint8)));
     connect(&ext1,SIGNAL(interrupt_B(quint8)),this,SLOT(ext1_intB(quint8)));
 
+    //Setup extender 2
     ret = ext2.open(EXT2);
     ret = ext2.setTris(PORTA,TRISA2);
     ret = ext2.setTris(PORTB,TRISB2);
@@ -91,6 +96,16 @@ void Panel::setup_hardware()
 
     setupMcp23017_isr_ext2(&ext2);
     connect(&ext2,SIGNAL(interrupt_B(quint8)),this,SLOT(ext2_intB(quint8)));
+
+    //Setup extender 3
+    ret = ext3.open(EXT3);
+    ret = ext3.setTris(PORTA,TRISA3);
+    ret = ext3.setTris(PORTB,TRISB3);
+    ret = ext3.setPullup(PORTA,A_PULLUP3);
+    ret = ext3.setPullup(PORTB,B_PULLUP3);
+
+    setupMcp23017_isr_ext3(&ext3);
+    connect(&ext3,SIGNAL(interrupt_B(quint8)),this,SLOT(ext3_intB(quint8)));
 
     //Setup encoders
     connect(&enc1,SIGNAL(encoder_changed(quint8)),this,SLOT(enc1_changed(quint8)));
@@ -110,6 +125,8 @@ void Panel::setup_hardware()
     connect(&but6,SIGNAL(button_changed(quint8)),this,SLOT(but6_changed(quint8)));
     connect(&but7,SIGNAL(button_changed(quint8)),this,SLOT(but7_changed(quint8)));
     connect(&but8,SIGNAL(button_changed(quint8)),this,SLOT(but8_changed(quint8)));
+    connect(&but9,SIGNAL(button_changed(quint8)),this,SLOT(but9_changed(quint8)));
+    connect(&but10,SIGNAL(button_changed(quint8)),this,SLOT(but10_changed(quint8)));
 
     //Setup telnet object
     comm = new QtTelnet;
@@ -279,6 +296,31 @@ void Panel::ext2_intB(quint8 value)
     }
 }
 
+void Panel::ext3_intB(quint8 value)
+{
+    qDebug("Int in port B, value: %x", value);
+    //Compare new state of portB with latest state:
+    quint8 aux,enc,newstate;
+    aux = ext3.portb ^ value; //Find pin that produced interruption
+    qDebug("aux = %x",aux);
+    ext3.portb = value;
+
+    switch (aux) {
+        case(BUT9):
+            newstate = (value & BUT9)>>7; //bit 7
+            but9.on_off(newstate);
+            qDebug("newstate = %x",newstate);
+            break;
+    case(BUT10):
+        newstate = (value & BUT10)>>6; //bit 6
+        but10.on_off(newstate);
+        qDebug("newstate = %x",newstate);
+        break;
+
+
+        default: break;
+    }
+ }
 //Encoders slots
 void Panel::enc1_changed(quint8 direction)
 {
@@ -407,6 +449,28 @@ void Panel::but8_changed(quint8 direction)
     button8(direction);
 }
 
+void Panel::but9_changed(quint8 direction)
+{
+    qDebug("Button 9 pressed");
+    if (direction) {
+        LED_BUT9_ON;
+    } else {
+        LED_BUT9_OFF;
+    }
+    button9(direction);
+}
+
+void Panel::but10_changed(quint8 direction)
+{
+    qDebug("Button 10 pressed");
+    if (direction) {
+        LED_BUT10_ON;
+    } else {
+        LED_BUT10_OFF;
+    }
+    button10(direction);
+}
+
 /*********************
  * Virtual functions *
  *********************/
@@ -463,5 +527,13 @@ void Panel::button7(quint8 direction)
 }
 
 void Panel::button8(quint8 direction)
+{
+}
+
+void Panel::button9(quint8 direction)
+{
+}
+
+void Panel::button10(quint8 direction)
 {
 }
