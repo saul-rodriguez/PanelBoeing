@@ -106,6 +106,13 @@
 #define BUT9 0b10000000
 #define BUT10 0b01000000
 
+// button mask address in port B ext2
+#define BUT11 0b00010000
+#define BUT12 0b00100000
+#define BUT13 0b01000000
+#define BUT14 0b10000000
+
+
 /*****************
  * Buttons' LEDs *
  *****************/

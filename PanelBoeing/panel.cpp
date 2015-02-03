@@ -127,6 +127,10 @@ void Panel::setup_hardware()
     connect(&but8,SIGNAL(button_changed(quint8)),this,SLOT(but8_changed(quint8)));
     connect(&but9,SIGNAL(button_changed(quint8)),this,SLOT(but9_changed(quint8)));
     connect(&but10,SIGNAL(button_changed(quint8)),this,SLOT(but10_changed(quint8)));
+    connect(&but11,SIGNAL(button_changed(quint8)),this,SLOT(but11_changed(quint8)));
+    connect(&but12,SIGNAL(button_changed(quint8)),this,SLOT(but12_changed(quint8)));
+    connect(&but13,SIGNAL(button_changed(quint8)),this,SLOT(but13_changed(quint8)));
+    connect(&but14,SIGNAL(button_changed(quint8)),this,SLOT(but14_changed(quint8)));
 
     //Setup telnet object
     comm = new QtTelnet;
@@ -294,6 +298,30 @@ void Panel::ext2_intB(quint8 value)
         qDebug("newstate = %x",newstate);
         enc6.change_state(newstate);
     }
+
+    switch (aux) {
+        case(BUT11):
+            newstate = (value & BUT11)>>4; //bit 4
+            but11.change_state(newstate);
+            qDebug("newstate = %x",newstate);
+            break;
+        case(BUT12):
+            newstate = (value & BUT12)>>5; //bit 5
+            but12.change_state(newstate);
+            qDebug("newstate = %x",newstate);
+            break;
+        case(BUT13):
+            newstate = (value & BUT13)>>6; //bit 6
+            but13.change_state(newstate);
+            qDebug("newstate = %x",newstate);
+            break;
+        case(BUT14):
+            newstate = (value & BUT14)>>7; //bit 7
+            but14.change_state(newstate);
+            qDebug("newstate = %x",newstate);
+            break;
+        default: break;
+    }
 }
 
 void Panel::ext3_intB(quint8 value)
@@ -311,12 +339,11 @@ void Panel::ext3_intB(quint8 value)
             but9.on_off(newstate);
             qDebug("newstate = %x",newstate);
             break;
-    case(BUT10):
-        newstate = (value & BUT10)>>6; //bit 6
-        but10.on_off(newstate);
-        qDebug("newstate = %x",newstate);
-        break;
-
+        case(BUT10):
+            newstate = (value & BUT10)>>6; //bit 6
+            but10.on_off(newstate);
+            qDebug("newstate = %x",newstate);
+            break;
 
         default: break;
     }
@@ -471,6 +498,51 @@ void Panel::but10_changed(quint8 direction)
     button10(direction);
 }
 
+void Panel::but11_changed(quint8 direction)
+{
+    qDebug("Button 11 pressed");
+    if (direction) {
+        //LED_BUT10_ON;
+    } else {
+        //LED_BUT10_OFF;
+    }
+    button11(direction);
+}
+
+void Panel::but12_changed(quint8 direction)
+{
+    qDebug("Button 12 pressed");
+    if (direction) {
+        //LED_BUT10_ON;
+    } else {
+        //LED_BUT10_OFF;
+    }
+    button12(direction);
+}
+
+void Panel::but13_changed(quint8 direction)
+{
+    qDebug("Button 13 pressed");
+    if (direction) {
+        //LED_BUT10_ON;
+    } else {
+        //LED_BUT10_OFF;
+    }
+    button13(direction);
+}
+
+void Panel::but14_changed(quint8 direction)
+{
+    qDebug("Button 14 pressed");
+    if (direction) {
+        //LED_BUT10_ON;
+    } else {
+        //LED_BUT10_OFF;
+    }
+    button14(direction);
+}
+
+
 /*********************
  * Virtual functions *
  *********************/
@@ -535,5 +607,21 @@ void Panel::button9(quint8 direction)
 }
 
 void Panel::button10(quint8 direction)
+{
+}
+
+void Panel::button11(quint8 direction)
+{
+}
+
+void Panel::button12(quint8 direction)
+{
+}
+
+void Panel::button13(quint8 direction)
+{
+}
+
+void Panel::button14(quint8 direction)
 {
 }

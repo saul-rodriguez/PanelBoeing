@@ -19,6 +19,7 @@ public:
     void setup_hardware();
     void export_pins();
 
+    //These functions are called by subclasses
 
     virtual void encoder1(quint8 direction);
     virtual void encoder2(quint8 direction);
@@ -39,6 +40,11 @@ public:
     virtual void button9(quint8 direction);
     virtual void button10(quint8 direction);
 
+    virtual void button11(quint8 direction);
+    virtual void button12(quint8 direction);
+    virtual void button13(quint8 direction);
+    virtual void button14(quint8 direction);
+
 signals:
     void telMes(QString msg);
     
@@ -46,6 +52,7 @@ public slots:
     void telnetMessage(const QString &msg);
     void telnetConnectionError(QAbstractSocket::SocketError);
 
+    //Interrupt handlers
     void ext1_intA(quint8 value);
     void ext1_intB(quint8 value);
 
@@ -53,6 +60,7 @@ public slots:
     void ext2_intB(quint8 value);
     void ext3_intB(quint8 value);
 
+    //These functions are executed when interrupts are produced
     void enc1_changed(quint8 direction);
     void enc2_changed(quint8 direction);
     void enc3_changed(quint8 direction);
@@ -71,6 +79,11 @@ public slots:
 
     void but9_changed(quint8 direction);
     void but10_changed(quint8 direction);
+
+    void but11_changed(quint8 direction);
+    void but12_changed(quint8 direction);
+    void but13_changed(quint8 direction);
+    void but14_changed(quint8 direction);
 
 protected:
     Display7seg disp1;
@@ -103,6 +116,10 @@ protected:
     Pbutton but8;
     Pbutton but9;
     Pbutton but10;
+    Pbutton but11;
+    Pbutton but12;
+    Pbutton but13;
+    Pbutton but14;
 
 public:
     QtTelnet* comm;
