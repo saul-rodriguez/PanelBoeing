@@ -27,6 +27,9 @@ B777::B777(QObject *parent) :
     mode[1] = "VOR";
     mode[2] = "MAP";
     mode[3] = "PLN";
+
+    lvor = 0;
+    rvor = 0;
 }
 
 void B777::button1(quint8 direction)
@@ -160,6 +163,112 @@ void B777::button8(quint8 direction)
     }
     comm->sendData(command);
 
+}
+
+void B777::button9(quint8 direction)
+{
+    qDebug("B777 Button9, AT R called");
+
+    QString command;
+
+    if (direction) { //turn on
+        command = "set /instrumentation/afds/inputs/at-armed[1] true";
+    } else { //turn off
+        command = "set /instrumentation/afds/inputs/at-armed[1] false";
+    }
+    comm->sendData(command);
+
+}
+
+void B777::button10(quint8 direction)
+{
+    qDebug("B777 Button10, AT L called");
+
+    QString command;
+
+    if (direction) { //turn on
+        command = "set /instrumentation/afds/inputs/at-armed true";
+    } else { //turn off
+        command = "set /instrumentation/afds/inputs/at-armed false";
+    }
+    comm->sendData(command);
+
+}
+
+void B777::button11(quint8 direction)
+{
+    qDebug("B777 Button11, VOR R up called");
+
+    if (rvor >= 1) return;
+
+    rvor++;
+
+    QVariant aux;
+    aux = rvor;
+
+    QString command;
+
+    command = "set /instrumentation/efis/inputs/rh-vor-adf ";
+    command += aux.toString();
+
+    comm->sendData(command);
+}
+
+void B777::button12(quint8 direction)
+{
+    qDebug("B777 Button11, VOR R down called");
+
+    if (rvor <= -1) return;
+
+    rvor--;
+
+    QVariant aux;
+    aux = rvor;
+
+    QString command;
+
+    command = "set /instrumentation/efis/inputs/rh-vor-adf ";
+    command += aux.toString();
+
+    comm->sendData(command);
+}
+
+void B777::button13(quint8 direction)
+{
+    qDebug("B777 Button13, VOR L up called");
+
+    if (lvor >= 1) return;
+
+    lvor++;
+
+    QVariant aux;
+    aux = lvor;
+
+    QString command;
+
+    command = "set /instrumentation/efis/inputs/lh-vor-adf ";
+    command += aux.toString();
+
+    comm->sendData(command);
+}
+
+void B777::button14(quint8 direction)
+{
+    qDebug("B777 Button14, VOR L down called");
+
+    if (lvor <= -1) return;
+
+    lvor--;
+
+    QVariant aux;
+    aux = lvor;
+
+    QString command;
+
+    command = "set /instrumentation/efis/inputs/lh-vor-adf ";
+    command += aux.toString();
+
+    comm->sendData(command);
 }
 
 void B777::encoder1(quint8 direction)
