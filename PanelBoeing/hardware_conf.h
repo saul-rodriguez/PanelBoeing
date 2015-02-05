@@ -105,12 +105,14 @@
 // button mask address in port B ext3
 #define BUT9 0b10000000
 #define BUT10 0b01000000
+#define BUT15 0b00100000
 
 // button mask address in port B ext2
 #define BUT11 0b00010000
 #define BUT12 0b00100000
 #define BUT13 0b01000000
 #define BUT14 0b10000000
+
 
 
 /*****************
@@ -139,5 +141,7 @@
 #define LED_BUT10_ON  ext3.writePin(PORTA,1,1)
 #define LED_BUT10_OFF ext3.writePin(PORTA,1,0)
 
+#define LED_BUT11_ON  ext3.writePin(PORTA,2,1)
+#define LED_BUT11_OFF ext3.writePin(PORTA,2,0)
 
 #endif // HARDWARE_CONF_H

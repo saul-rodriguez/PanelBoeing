@@ -27,6 +27,8 @@ public:
     void button13(quint8 direction);
     void button14(quint8 direction);
 
+    void button15(quint8 direction);
+
     void encoder1(quint8 direction);
     void encoder2(quint8 direction);
     void encoder3(quint8 direction);

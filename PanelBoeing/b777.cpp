@@ -271,6 +271,21 @@ void B777::button14(quint8 direction)
     comm->sendData(command);
 }
 
+void B777::button15(quint8 direction)
+{
+    qDebug("B777 Button15, CTR encoder button called");
+
+    QString command;
+
+    if (direction) { //turn on
+        command = "set /instrumentation/efis/inputs/nd-centered true";
+    } else { //turn off
+        command = "set /instrumentation/efis/inputs/nd-centered false";
+    }
+    comm->sendData(command);
+
+}
+
 void B777::encoder1(quint8 direction)
 {
     // SPEED

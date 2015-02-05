@@ -45,6 +45,8 @@ public:
     virtual void button13(quint8 direction);
     virtual void button14(quint8 direction);
 
+    virtual void button15(quint8 direction);
+
 signals:
     void telMes(QString msg);
     
@@ -85,6 +87,8 @@ public slots:
     void but13_changed(quint8 direction);
     void but14_changed(quint8 direction);
 
+    void but15_changed(quint8 direction);
+
 protected:
     Display7seg disp1;
     Display7seg disp2;
@@ -120,6 +124,8 @@ protected:
     Pbutton but12;
     Pbutton but13;
     Pbutton but14;
+    Pbutton but15;
+
 
 public:
     QtTelnet* comm;
